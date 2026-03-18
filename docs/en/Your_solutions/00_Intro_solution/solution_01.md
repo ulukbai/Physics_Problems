@@ -1,197 +1,113 @@
-# Section 0 — Mathematical Foundations  
+```python?code_reference&code_event_index=2
+import numpy as np
+
+# 1. Vector Algebra
+a = np.array([2, 1, -3])
+b = np.array([4, -2, 1])
+
+# a) Magnitudes
+mag_a = np.linalg.norm(a)
+mag_b = np.linalg.norm(b)
+
+# b) Dot product
+dot_prod = np.dot(a, b)
+
+# c) Cross product
+cross_prod = np.cross(a, b)
+
+# d) Angle
+cos_theta = dot_prod / (mag_a * mag_b)
+angle_rad = np.arccos(cos_theta)
+angle_deg = np.degrees(angle_rad)
+
+# 2. Systems of Equations
+# 2x + 3y = 12
+# x - y = 1 -> x = y + 1
+# 2(y + 1) + 3y = 12 -> 2y + 2 + 3y = 12 -> 5y = 10 -> y = 2
+# x = 2 + 1 = 3
+
+A = np.array([[2, 3], [1, -1]])
+B = np.array([12, 1])
+solution = np.linalg.solve(A, B)
+
+print(f"{mag_a=}")
+print(f"{mag_b=}")
+print(f"{dot_prod=}")
+print(f"{cross_prod=}")
+print(f"{angle_deg=}")
+print(f"{solution=}")
+
+
+```
+```text?code_stdout&code_event_index=2
+mag_a=3.7416573867739413
+mag_b=4.58257569495584
+dot_prod=3
+cross_prod=array([ -5, -14,  -8])
+angle_deg=79.92346287144585
+solution=array([3., 2.])
+
+```
 ## 1. Vector Algebra
 
-We are given two vectors in $\mathbb{R}^3$:
+Given the vectors:
+$\vec{a} = [2, 1, -3]$
+$\vec{b} = [4, -2, 1]$
 
-$$
-\vec{a} = [2,\,1,\,-3], \qquad \vec{b} = [4,\,-2,\,1]
-$$
+### a) Magnitude of each vector
+The magnitude (or length) of a vector $[x, y, z]$ is calculated as $\sqrt{x^2 + y^2 + z^2}$.
 
----
+* **Magnitude of $\vec{a}$:**
+    $$|\vec{a}| = \sqrt{2^2 + 1^2 + (-3)^2} = \sqrt{4 + 1 + 9} = \sqrt{14} \approx 3.742$$
 
-## Necessary definitions and formulas
+* **Magnitude of $\vec{b}$:**
+    $$|\vec{b}| = \sqrt{4^2 + (-2)^2 + 1^2} = \sqrt{16 + 4 + 1} = \sqrt{21} \approx 4.583$$
 
-### 1) Magnitude (length) of a vector
-For $\vec{v} = [v_x, v_y, v_z]$,
+### b) Dot product $\vec{a} \cdot \vec{b}$
+The dot product is the sum of the products of the corresponding components:
+$$\vec{a} \cdot \vec{b} = (2 \cdot 4) + (1 \cdot -2) + (-3 \cdot 1)$$
+$$\vec{a} \cdot \vec{b} = 8 - 2 - 3 = 3$$
 
-$$
-|\vec{v}| = \sqrt{v_x^2 + v_y^2 + v_z^2}
-$$
 
-### 2) Dot product
-For $\vec{a} = [a_x,a_y,a_z]$ and $\vec{b} = [b_x,b_y,b_z]$,
 
-$$
-\vec{a}\cdot\vec{b} = a_x b_x + a_y b_y + a_z b_z
-$$
+### c) Cross product $\vec{a} \times \vec{b}$
+The cross product is found using the determinant of a $3 \times 3$ matrix:
+$$\vec{a} \times \vec{b} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 2 & 1 & -3 \\ 4 & -2 & 1 \end{vmatrix}$$
 
-### 3) Cross product
-For $\vec{a} = [a_x,a_y,a_z]$ and $\vec{b} = [b_x,b_y,b_z]$,
+$$\vec{a} \times \vec{b} = \mathbf{i}(1 \cdot 1 - (-3)(-2)) - \mathbf{j}(2 \cdot 1 - (-3)(4)) + \mathbf{k}(2 \cdot -2 - 1 \cdot 4)$$
+$$\vec{a} \times \vec{b} = \mathbf{i}(1 - 6) - \mathbf{j}(2 + 12) + \mathbf{k}(-4 - 4)$$
+$$\vec{a} \times \vec{b} = [-5, -14, -8]$$
 
-$$
-\vec{a}\times\vec{b} =
-\begin{bmatrix}
-a_y b_z - a_z b_y \\
-a_z b_x - a_x b_z \\
-a_x b_y - a_y b_x
-\end{bmatrix}
-$$
 
-### 4) Angle between two vectors
-If $\theta$ is the angle between $\vec{a}$ and $\vec{b}$, then
 
-$$
-\vec{a}\cdot\vec{b} = |\vec{a}|\,|\vec{b}| \cos\theta
-$$
+[Image of cross product of two vectors]
 
-So,
 
-$$
-\theta = \arccos\!\left(\frac{\vec{a}\cdot\vec{b}}{|\vec{a}|\,|\vec{b}|}\right)
-$$
+### d) Angle between vectors $\vec{a}$ and $\vec{b}$
+The angle $\theta$ can be found using the formula $\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos(\theta)$:
+$$\cos(\theta) = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}| |\vec{b}|} = \frac{3}{\sqrt{14} \cdot \sqrt{21}} = \frac{3}{\sqrt{294}}$$
+$$\theta = \arccos\left(\frac{3}{\sqrt{294}}\right) \approx 79.92^\circ$$
 
 ---
 
-## (a) Magnitude of each vector
+## 2. Systems of Equations
 
-### Magnitude of $\vec{a}$
-Using $|\vec{a}| = \sqrt{2^2 + 1^2 + (-3)^2}$:
+We have the system:
+1) $2x + 3y = 12$
+2) $x - y = 1$
 
-$$
-|\vec{a}| = \sqrt{4 + 1 + 9} = \sqrt{14}
-$$
+### Using the Substitution Method:
+From equation (2), we can express $x$ in terms of $y$:
+$$x = y + 1$$
 
-### Magnitude of $\vec{b}$
-Using $|\vec{b}| = \sqrt{4^2 + (-2)^2 + 1^2}$:
+Substitute this into equation (1):
+$$2(y + 1) + 3y = 12$$
+$$2y + 2 + 3y = 12$$
+$$5y = 10$$
+$$y = 2$$
 
-$$
-|\vec{b}| = \sqrt{16 + 4 + 1} = \sqrt{21}
-$$
+Now, substitute $y = 2$ back into the expression for $x$:
+$$x = 2 + 1 = 3$$
 
-**Answer (a):**
-
-$$
-|\vec{a}|=\sqrt{14}, \qquad |\vec{b}|=\sqrt{21}
-$$
-
----
-
-## (b) Dot product $\vec{a}\cdot\vec{b}$
-
-Compute component-by-component:
-
-$$
-\vec{a}\cdot\vec{b} = (2)(4) + (1)(-2) + (-3)(1)
-$$
-
-$$
-\vec{a}\cdot\vec{b} = 8 - 2 - 3 = 3
-$$
-
-**Answer (b):**
-
-$$
-\vec{a}\cdot\vec{b} = 3
-$$
-
----
-
-## (c) Cross product $\vec{a}\times\vec{b}$
-
-Let $\vec{a}=[2,1,-3]$ and $\vec{b}=[4,-2,1]$.
-
-### $x$-component
-$$
-(\vec{a}\times\vec{b})_x = a_y b_z - a_z b_y = (1)(1) - (-3)(-2) = 1 - 6 = -5
-$$
-
-### $y$-component
-$$
-(\vec{a}\times\vec{b})_y = a_z b_x - a_x b_z = (-3)(4) - (2)(1) = -12 - 2 = -14
-$$
-
-### $z$-component
-$$
-(\vec{a}\times\vec{b})_z = a_x b_y - a_y b_x = (2)(-2) - (1)(4) = -4 - 4 = -8
-$$
-
-So,
-
-$$
-\vec{a}\times\vec{b} = [-5,\,-14,\,-8]
-$$
-
-**Answer (c):**
-
-$$
-\vec{a}\times\vec{b} = [-5,\,-14,\,-8]
-$$
-
----
-
-## (d) Angle between $\vec{a}$ and $\vec{b}$
-
-Use
-
-$$
-\theta = \arccos\!\left(\frac{\vec{a}\cdot\vec{b}}{|\vec{a}|\,|\vec{b}|}\right)
-$$
-
-We already found:
-- $\vec{a}\cdot\vec{b} = 3$
-- $|\vec{a}| = \sqrt{14}$
-- $|\vec{b}| = \sqrt{21}$
-
-Substitute:
-
-$$
-\theta = \arccos\!\left(\frac{3}{\sqrt{14}\sqrt{21}}\right)
-$$
-
-Combine the radicals:
-
-$$
-\sqrt{14}\sqrt{21}=\sqrt{294}
-$$
-
-So the exact form is:
-
-$$
-\theta = \arccos\!\left(\frac{3}{\sqrt{294}}\right)
-$$
-
-Optional numeric approximation:
-- $\sqrt{294}\approx 17.146$
-- $\frac{3}{\sqrt{294}}\approx 0.175$
-
-So,
-
-$$
-\theta \approx \arccos(0.175)\approx 1.395\text{ rad}\approx 79.9^\circ
-$$
-
-**Answer (d):**
-
-$$
-\theta = \arccos\!\left(\frac{3}{\sqrt{294}}\right)\approx 79.9^\circ
-$$
-
----
-
-## Final answers (summary)
-
-$$
-|\vec{a}|=\sqrt{14}, \qquad |\vec{b}|=\sqrt{21}
-$$
-
-$$
-\vec{a}\cdot\vec{b}=3
-$$
-
-$$
-\vec{a}\times\vec{b}=[-5,\,-14,\,-8]
-$$
-
-$$
-\theta=\arccos\!\left(\frac{3}{\sqrt{294}}\right)\approx 79.9^\circ
-$$
+**Solution:**
+$x = 3, y = 2$
