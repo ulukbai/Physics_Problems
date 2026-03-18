@@ -90,24 +90,3 @@ $$\theta = \arccos\left(\frac{3}{\sqrt{294}}\right) \approx 79.92^\circ$$
 
 ---
 
-## 2. Systems of Equations
-
-We have the system:
-1) $2x + 3y = 12$
-2) $x - y = 1$
-
-### Using the Substitution Method:
-From equation (2), we can express $x$ in terms of $y$:
-$$x = y + 1$$
-
-Substitute this into equation (1):
-$$2(y + 1) + 3y = 12$$
-$$2y + 2 + 3y = 12$$
-$$5y = 10$$
-$$y = 2$$
-
-Now, substitute $y = 2$ back into the expression for $x$:
-$$x = 2 + 1 = 3$$
-
-**Solution:**
-$x = 3, y = 2$
