@@ -34,3 +34,5 @@ $$a_c \approx 0.0337 \text{ m/s}^2$$
 
 For context, this acceleration is only about **0.34%** of the acceleration due to gravity ($g \approx 9.8 \text{ m/s}^2$). This is why you don't feel like you're being "flung" off the Earth, though you do technically weigh slightly less at the equator than at the poles!
 
+
+>>>>>>> 4d08280e26bc3a13551866bd3bd139050c53021d
